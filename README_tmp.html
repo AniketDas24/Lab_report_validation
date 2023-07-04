@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title><h1 id</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="ehospital-lab-report-validating-api">eHospital Lab Report Validating API</h1>
+<p>The Lab Report Validating API is a web service that allows you to validate data from lab report by checking it in existing patient's database and to show error messages as response output.If patients data is showing high,low or normal result,the API will also reflect respective response.</p>
+<h2 id="create-database">Create Database</h2>
+<p>To create Postgres database in CLI, follow these steps:</p>
+<p>1.Start Postgresql Service:</p>
+<p><code>psql </code></p>
+<p>2.Create Database:</p>
+<p><code>CREATE DATABASE tests_val </code></p>
+<h2 id="build-and-run">Build and Run</h2>
+<p>To build and run the Lab Report Validating API, follow these steps:</p>
+<ol>
+<li>
+<p>Clone the repository from GitHub:</p>
+<p><code>git clone https://github.com/AniketDas24/project.git </code></p>
+</li>
+<li>
+<p>Navigate to the project directory:</p>
+<p><code>cd task3</code></p>
+</li>
+<li>
+<p>Build the project using Maven:</p>
+<p><code>mvn clean package</code></p>
+</li>
+<li>
+<p>Run the application:</p>
+<p><code>java -jar target/project-0.0.1-SNAPSHOT.jar</code></p>
+</li>
+</ol>
+<h2 id="insert-data-into-table">INSERT DATA INTO TABLE</h2>
+<p>To create Postgres database in CLI, follow these steps:</p>
+<p>1.Insert Data:</p>
+<p><code>insert into tests_val(test_id, test_name, age_from, age_to, gender, min_result, max_result, unit) values(1, 'hemoglobin',0, 12, 'M', 10, 14, 'g/dl'); </code></p>
+<p>2.Follow above step to insert more data by changing respective values.</p>
+<p>The API will be accessible at <code>http://localhost:8080</code>.</p>
+<h2 id="description">Description</h2>
+<h3 id="validating-report-data">Validating Report Data</h3>
+<p><strong>Endpoint:</strong> <code>/validate</code></p>
+<p><strong>Method:</strong> POST</p>
+<p><strong>Description:</strong> Checks Report Data and validate it using existing database and return respective Response message.</p>
+<p><strong>Request Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th style="text-align:center">Type</th>
+<th style="text-align:right">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>test_id</td>
+<td style="text-align:center">integer</td>
+<td style="text-align:right">Particular test id number</td>
+</tr>
+<tr>
+<td>result</td>
+<td style="text-align:center">float</td>
+<td style="text-align:right">Particular Test Result</td>
+</tr>
+<tr>
+<td>unit</td>
+<td style="text-align:center">string</td>
+<td style="text-align:right">Particular Test Unit</td>
+</tr>
+<tr>
+<td>gender</td>
+<td style="text-align:center">string</td>
+<td style="text-align:right">Particular Test Gender</td>
+</tr>
+<tr>
+<td>age</td>
+<td style="text-align:center">integer</td>
+<td style="text-align:right">Particular Test Age</td>
+</tr>
+</tbody>
+</table>
+<center>
+<img src="file:///home/aniket/Projects/NIC_Task3/task3/images/image.png" alt="postman-testing">
+</center>
+<p><strong>Success Response:</strong></p>
+<ol>
+<li>Result Exceeding Upper Limit</li>
+</ol>
+<ul>
+<li><em>Status Code:</em> 200 OK</li>
+<li><em>Body:</em> <code>High test_name</code></li>
+</ul>
+<ol start="2">
+<li>Result Below Lower Limit</li>
+</ol>
+<ul>
+<li><em>Status Code:</em> 200 OK</li>
+<li><em>Body:</em> <code>Low test_name</code></li>
+</ul>
+<p>3.1. Result In Range</p>
+<ul>
+<li><em>Status Code:</em> 200 OK</li>
+<li><em>Body:</em> <code>Normal test_name</code></li>
+</ul>
+<p><strong>Failure Response:</strong></p>
+<ol>
+<li>Patient Age Not In Range</li>
+</ol>
+<ul>
+<li><em>Status Code:</em> 400 Bad Request</li>
+<li><em>Body:</em> <code>Age Not In Range</code></li>
+</ul>
+<ol start="2">
+<li>Particular Test_ID Doesnot Exist</li>
+</ol>
+<ul>
+<li><em>Status Code:</em> 400 Bad Request</li>
+<li><em>Body:</em> <code>Invalid Report</code></li>
+</ul>
+<h2 id="libraries-and-tools-used">Libraries and Tools Used</h2>
+<p>The following libraries and tools are used in this API:</p>
+<ul>
+<li>Language : <img src="./images/icons8-java-48.png" height=25> Java (JDK 20)</li>
+<li>Framework: <img src="./images/icons8-spring-boot-48.png" height=25> SpringBoot (3.1.2 Snapshot)</li>
+</ul>
+<h2 id="dependencies">Dependencies</h2>
+<p>Maven Dependencies used:</p>
+<ul>
+<li>spring-boot-starter-data-jpa</li>
+<li>spring-boot-starter-jdbc</li>
+<li>Postgresql Driver</li>
+<li>spring-boot-starter-web</li>
+</ul>
+<h2 id="license">License</h2>
+<p>This API is open source and licensed under the MIT License.</p>
+<h2 id="contributions">Contributions</h2>
+<p>Contributions to this project are welcome. If you encounter any issues or have suggestions for improvements, please open an issue or submit a pull request on the project's repository or mail me at aniketdas9862@gmail.com</p>
+
+</body>
+</html>
