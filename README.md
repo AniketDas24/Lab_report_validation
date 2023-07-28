@@ -17,7 +17,7 @@ To build and run the Lab Report Validating API, follow these steps:
 
 1. Clone the repository from GitHub:
    
-   `git clone https://github.com/AniketDas24/project.git `
+   `git@github.com:AniketDas24/Lab_report_validation.git `
    
 2. Navigate to the project directory:
    
